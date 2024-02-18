@@ -6,11 +6,15 @@ pipeline {
         AWS_ACCESS_KEY_ID = 'AKIAVRY6V47LQVVTFYHS'
         AWS_SECRET_ACCESS_KEY = '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'
     }
+    tools{
+        maven 'Maven'
+    }
 
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
+
             }
         }
 
