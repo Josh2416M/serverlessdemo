@@ -1,4 +1,4 @@
-name : deploy serverless
+name : Deploy Lambda
 
 on:
   push:
