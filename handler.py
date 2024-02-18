@@ -1,24 +1,19 @@
 import json
-
-
 def hello(event, context):
-    body = {
-        "message": "Go Serverless v1.0! Your function executed successfully!",
-        "input": event
-    }
-
-    response = {
-        "statusCode": 200,
-        "body": json.dumps(body)
-    }
-
-    return response
-
-    # Use this code if you don't use the http event with the LAMBDA-PROXY
-    # integration
-    """
+    if event.get('httpMethod') == 'POST':
+        body = event.get('body')
+        if body:
+            body = json.loads(body)
+            if body.get('type') == 'url_verification':
+                challenge = body.get('challenge')
+                return {
+                    "statusCode": 200,
+                    "headers": {
+                        "Content-Type": "text/plain"
+                    },
+                    "body": challenge
+                }
     return {
-        "message": "Go Serverless v1.0! Your function executed successfully!",
-        "event": event
+        "statusCode": 400,
+        "body": "Bad Request"
     }
-    """

@@ -18,8 +18,9 @@ pipeline {
 
         stage('Install dependencies') {
             steps {
-                sh 'npm install -g serverless'
+                
                 sh 'npm install' // Install any project-specific dependencies
+		sh 'npm install -g serverless'
             }
         }
 
