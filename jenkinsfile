@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+
+    environment {
+        AWS_DEFAULT_REGION = 'us-east-1'
+        AWS_ACCESS_KEY_ID = credentials('your-aws-access-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('your-aws-secret-access-key')
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Install dependencies') {
+            steps {
+                sh 'npm install -g serverless'
+                sh 'npm install' // Install any project-specific dependencies
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    sh 'serverless deploy'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Lambda function deployed successfully!'
+        }
+        failure {
+            echo 'Deployment failed'
+        }
+    }
+}

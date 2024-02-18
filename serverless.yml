@@ -51,7 +51,7 @@ functions:
     handler: handler.hello
     events:
       - httpApi:
-          path: /users/create
+          path: /message
           method: post
       
 
