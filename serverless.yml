@@ -106,3 +106,4 @@ functions:
 
 plugins:
   - serverless-offline
+  - serverless-python-requirements
